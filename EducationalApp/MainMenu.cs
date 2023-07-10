@@ -76,24 +76,29 @@ namespace EducationalApp
                 if (indexOfOption == 0) SubMenu(subMenuLanguageBasicsOptions, actions);
                 else if (indexOfOption == exitIndex-1) 
                 {
-                    AnsiConsole.Progress()
-                    .StartAsync(async ctx =>
+                    if (AnsiConsole.Confirm("Run prompt example?"))
                     {
-                        // Define tasks
-                        var task1 = ctx.AddTask("[blue] Deleting Sys32[/]");
-
-                        while (!ctx.IsFinished)
+                        AnsiConsole.MarkupLine("Ok... :(");
+                        AnsiConsole.Progress()
+                        .StartAsync(async ctx =>
                         {
-                            // Simulate some work
-                            await Task.Delay(10);
+                            // Define tasks
+                            var task1 = ctx.AddTask("[blue] Deleting Sys32[/]");
 
-                            // Increment
-                            task1.Increment(1.5);
-                        }
-                        Console.WriteLine(" Done <3");
+                            while (!ctx.IsFinished)
+                            {
+                                // Simulate some work
+                                await Task.Delay(10);
 
-                    });
-                    Thread.Sleep(3000); Environment.Exit(0); 
+                                // Increment
+                                task1.Increment(1.5);
+                            }
+                            Console.WriteLine(" Done <3");
+
+                        });
+                        Thread.Sleep(3000); Environment.Exit(0);
+                    }
+ 
                 }
                 else { Console.WriteLine("Wrong menu option!"); Thread.Sleep(1000); }
             }
