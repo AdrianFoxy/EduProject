@@ -12,9 +12,9 @@ namespace EducationalApp.LanguareBasics
         public static void Tasks()
         {
             Console.Clear();
-            //LanguareBasicsTask SubMenu
-            string[] subMenuOptions = { "Area of Cicle", "Feet To Centimeters", "Exit" };
-            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle, LanguaeBasicsTasks.TaskFeetToCentimeters };
+            string[] subMenuOptions = { "Area of Cicle", "Feet To Centimeters", "Nearest Thousand", "Seconds Into Minutes, Hours etc", "Exit" };
+            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle, LanguaeBasicsTasks.TaskFeetToCentimeters,
+                                     LanguaeBasicsTasks.TaskNearestThousand, LanguaeBasicsTasks.TaskConvertSecondsIntoMinutes };
             SubMenu(subMenuOptions, actions);
         }
         public static void HelloWorldAndConsoleCommands()
