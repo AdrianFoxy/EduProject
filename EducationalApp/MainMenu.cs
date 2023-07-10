@@ -10,15 +10,6 @@ namespace EducationalApp
 {
     public class MainMenu
     {
-        public static void MenuOption(string prefix, string message)
-        {
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(prefix);
-            Console.ResetColor();
-            Console.WriteLine($"] {message}");
-        }
-
         public delegate void MenuAction();
 
         public static void SubMenu(string[] subMenuValue, MenuAction[] actions)
