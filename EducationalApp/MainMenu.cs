@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,6 @@ namespace EducationalApp
 {
     public class MainMenu
     {
-        public static void WriteLogo()
-        {
-
-            Console.ForegroundColor = ConsoleColor.Blue;
-
-            string logo = "\r\n___________    .___       _____                 " +
-                          "\r\n\\_   _____/  __| _/_ __  /  _  \\ ______ ______  " +
-                          "\r\n |    __)_  / __ |  |  \\/  /_\\  \\\\____ \\\\____ \\ " +
-                          "\r\n |        \\/ /_/ |  |  /    |    \\  |_> >  |_> >" +
-                          "\r\n/_______  /\\____ |____/\\____|__  /   __/|   __/ " +
-                          "\r\n        \\/      \\/             \\/|__|   |__|    \r\n";
-
-            Console.WriteLine($"{logo} \n");
-
-            Console.ResetColor();
-        }
-
         public static void MenuOption(string prefix, string message)
         {
             Console.Write("[");
@@ -34,20 +18,30 @@ namespace EducationalApp
             Console.WriteLine($"] {message}");
         }
 
-        public static void SubMenu()
+        public delegate void MenuAction();
+
+        public static void SubMenu(string[] subMenuValue, MenuAction[] actions)
         {
-            while(true)
+            while (true)
             {
-                MenuOption("1", "Return to menu");
+                int exitIndex = subMenuValue.Length;
 
-                string option = Console.ReadLine()!;
+                var selectedOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("Select your [blue]menu option[/]?")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more options)[/]")
+                        .AddChoices(subMenuValue)
+                );
+                int indexOfOption = Array.IndexOf(subMenuValue, selectedOption);
 
-                if (option == "1") break;
-                else
-                {
-                    Console.WriteLine("Wrong menu option!");
-                    Thread.Sleep(1000);
+                if (indexOfOption >= 0 && indexOfOption < actions.Length)
+                {              
+                    MenuAction selectedAction = actions[indexOfOption];
+                    selectedAction();
                 }
+                else if (indexOfOption == exitIndex-1) Menu();            
+                else { Console.WriteLine("Wrong menu option!"); Thread.Sleep(1000); }
             }
         }
 
@@ -56,20 +50,37 @@ namespace EducationalApp
             while (true)
             {
                 Console.Clear();
-                WriteLogo();
-                MenuOption("1", "Hello World");
-                MenuOption("2", "Primitive Types");
-                MenuOption("3", "Basic Operators");
-                MenuOption("exit", "Exit the program");
-                MenuOption("exit", "Exit the program");
 
+                AnsiConsole.Write(
+                    new FigletText("EduApp \\o/")
+                        .LeftJustified()
+                        .Color(Color.Aqua));
 
-                string option = Console.ReadLine()!;
+                var menu_options = new[] {
+                    "Hello World", "Primitive Types", "Basic Operators",
+                    "Exit the program"
+                };
 
-                if (option == "1") LanguageBasics.HelloWorldAndConsoleCommands();
-                else if (option == "2") LanguageBasics.PrimitiveTypes();
-                else if (option == "3") LanguageBasics.OperatorsBasic();
-                else if (option == "exit") { Console.WriteLine("Bye~"); Thread.Sleep(1000); Environment.Exit(0); }
+                int exitIndex = menu_options.Length;
+                Console.WriteLine();
+
+                var selectedOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("Select your [blue]menu option[/]?")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more options)[/]")
+                        .AddChoices(menu_options)
+                );
+
+                int indexOfOption = Array.IndexOf(menu_options, selectedOption);
+
+                // Echo the selected option back to the terminal
+                AnsiConsole.WriteLine($"Well, yo choosed. '{selectedOption}' is tasty! And id is {indexOfOption}");
+
+                if (indexOfOption == 0) LanguageBasics.HelloWorldAndConsoleCommands();
+                else if (indexOfOption == 1) LanguageBasics.PrimitiveTypes();
+                else if (indexOfOption == 2) LanguageBasics.OperatorsBasic();
+                else if (indexOfOption == exitIndex-1) { Console.WriteLine("Bye~"); Thread.Sleep(1000); Environment.Exit(0); }
                 else { Console.WriteLine("Wrong menu option!"); Thread.Sleep(1000); }
             }
         }

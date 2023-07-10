@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EducationalApp.MainMenu;
 
 namespace EducationalApp
 {
@@ -25,7 +26,9 @@ namespace EducationalApp
 
             Console.WriteLine($"Well, hi {userName}! {userAge} it`s ok) \n");
 
-            MainMenu.SubMenu();
+            string[] subMenuOptions = { "Exit" };
+            MenuAction[] actions = { };
+            MainMenu.SubMenu(subMenuOptions, actions);
         }
 
         public static void PrimitiveTypes()
@@ -70,7 +73,9 @@ namespace EducationalApp
             Console.WriteLine("bool p: " + p);
             Console.WriteLine();
 
-            MainMenu.SubMenu();
+            string[] subMenuOptions = { "Exit" };
+            MenuAction[] actions = { };
+            MainMenu.SubMenu(subMenuOptions, actions);
         }
 
         public static void OperatorsBasic()
@@ -186,7 +191,10 @@ namespace EducationalApp
             Console.WriteLine($"Here is result of using Ternary Operator, string title = (age < 13) ? \"Child\" : (age >= 13 && age <= 19) ? \"Teenager\" : \"Adult\":");
             string title = (age < 13) ? "Child" : (age >= 13 && age <= 19) ? "Teenager" : "Adult";
             Console.WriteLine(title + "\n");
-            MainMenu.SubMenu();
+
+            string[] subMenuOptions = { "Exit" };
+            MenuAction[] actions = { };
+            MainMenu.SubMenu(subMenuOptions, actions);
         }
     }
 }
