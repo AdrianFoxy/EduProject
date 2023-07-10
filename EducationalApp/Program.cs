@@ -5,9 +5,10 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        MainMenu.Menu();
-        Console.ReadKey(true);
 
-        // Ask for the user's favorite fruit
+        Console.Title = "EduApp";
+        MainMenu.Menu();
+
+        Console.ReadKey(true);
     }
 }

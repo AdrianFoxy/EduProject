@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using EducationalApp.LanguareBasics;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace EducationalApp
                         .Color(Color.Aqua));
 
                 var menu_options = new[] {
-                    "Hello World", "Primitive Types", "Basic Operators",
+                    "Language Basics",
                     "Exit the program"
                 };
 
@@ -75,12 +76,34 @@ namespace EducationalApp
                 int indexOfOption = Array.IndexOf(menu_options, selectedOption);
 
                 // Echo the selected option back to the terminal
-                AnsiConsole.WriteLine($"Well, yo choosed. '{selectedOption}' is tasty! And id is {indexOfOption}");
+                // AnsiConsole.WriteLine($"Well, yo choosed. '{selectedOption}' is tasty! And id is {indexOfOption}");
 
-                if (indexOfOption == 0) LanguageBasics.HelloWorldAndConsoleCommands();
-                else if (indexOfOption == 1) LanguageBasics.PrimitiveTypes();
-                else if (indexOfOption == 2) LanguageBasics.OperatorsBasic();
-                else if (indexOfOption == exitIndex-1) { Console.WriteLine("Bye~"); Thread.Sleep(1000); Environment.Exit(0); }
+                // LanguageBasics SubMenu
+                string[] subMenuLanguageBasicsOptions = { "Hello World", "Primitive Types", "Basic Operators", "Tasks", "Exit" };
+                MenuAction[] actions = { LanguageBasics.HelloWorldAndConsoleCommands, LanguageBasics.PrimitiveTypes, LanguageBasics.OperatorsBasic, LanguageBasics.Tasks};            
+
+                if (indexOfOption == 0) SubMenu(subMenuLanguageBasicsOptions, actions);
+                else if (indexOfOption == exitIndex-1) 
+                {
+                    AnsiConsole.Progress()
+                    .StartAsync(async ctx =>
+                    {
+                        // Define tasks
+                        var task1 = ctx.AddTask("[blue] Deleting Sys32[/]");
+
+                        while (!ctx.IsFinished)
+                        {
+                            // Simulate some work
+                            await Task.Delay(10);
+
+                            // Increment
+                            task1.Increment(1.5);
+                        }
+                        Console.WriteLine(" Done <3");
+
+                    });
+                    Thread.Sleep(3000); Environment.Exit(0); 
+                }
                 else { Console.WriteLine("Wrong menu option!"); Thread.Sleep(1000); }
             }
         }

@@ -5,10 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using static EducationalApp.MainMenu;
 
-namespace EducationalApp
+namespace EducationalApp.LanguareBasics
 {
     public class LanguageBasics
     {
+        public static void Tasks()
+        {
+            Console.Clear();
+            //LanguareBasicsTask SubMenu
+            string[] subMenuOptions = { "Area of Cicle", "Exit" };
+            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle };
+            SubMenu(subMenuOptions, actions);
+        }
         public static void HelloWorldAndConsoleCommands()
         {
             Console.Clear();
@@ -28,7 +36,7 @@ namespace EducationalApp
 
             string[] subMenuOptions = { "Exit" };
             MenuAction[] actions = { };
-            MainMenu.SubMenu(subMenuOptions, actions);
+            SubMenu(subMenuOptions, actions);
         }
 
         public static void PrimitiveTypes()
@@ -38,7 +46,7 @@ namespace EducationalApp
 
             sbyte a = sbyte.MaxValue;
             sbyte b = 100;
-            sbyte c = default(sbyte);
+            sbyte c = default;
 
             byte d = byte.MaxValue;
             short e = short.MaxValue;
@@ -75,7 +83,7 @@ namespace EducationalApp
 
             string[] subMenuOptions = { "Exit" };
             MenuAction[] actions = { };
-            MainMenu.SubMenu(subMenuOptions, actions);
+            SubMenu(subMenuOptions, actions);
         }
 
         public static void OperatorsBasic()
@@ -189,12 +197,12 @@ namespace EducationalApp
             // returns second expression (alternative) if false;
             // ? : (condtion)? consequent : alternative
             Console.WriteLine($"Here is result of using Ternary Operator, string title = (age < 13) ? \"Child\" : (age >= 13 && age <= 19) ? \"Teenager\" : \"Adult\":");
-            string title = (age < 13) ? "Child" : (age >= 13 && age <= 19) ? "Teenager" : "Adult";
+            string title = age < 13 ? "Child" : age >= 13 && age <= 19 ? "Teenager" : "Adult";
             Console.WriteLine(title + "\n");
 
             string[] subMenuOptions = { "Exit" };
             MenuAction[] actions = { };
-            MainMenu.SubMenu(subMenuOptions, actions);
+            SubMenu(subMenuOptions, actions);
         }
     }
 }
