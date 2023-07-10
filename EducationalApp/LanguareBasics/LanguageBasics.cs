@@ -13,8 +13,8 @@ namespace EducationalApp.LanguareBasics
         {
             Console.Clear();
             //LanguareBasicsTask SubMenu
-            string[] subMenuOptions = { "Area of Cicle", "Exit" };
-            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle };
+            string[] subMenuOptions = { "Area of Cicle", "Feet To Centimeters", "Exit" };
+            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle, LanguaeBasicsTasks.TaskFeetToCentimeters };
             SubMenu(subMenuOptions, actions);
         }
         public static void HelloWorldAndConsoleCommands()
