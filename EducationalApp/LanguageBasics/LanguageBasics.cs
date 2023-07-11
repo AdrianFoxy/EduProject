@@ -12,11 +12,19 @@ namespace EducationalApp.LanguareBasics
         public static void Tasks()
         {
             Console.Clear();
-            string[] subMenuOptions = { "Area of Cicle", "Feet To Centimeters", "Nearest Thousand", "Seconds Into Minutes, Hours etc", "Exit" };
-            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle, LanguaeBasicsTasks.TaskFeetToCentimeters,
-                                     LanguaeBasicsTasks.TaskNearestThousand, LanguaeBasicsTasks.TaskConvertSecondsIntoMinutes };
+            string[] subMenuOptions = { "Area of Cicle", "Feet To Centimeters", 
+                                        "Nearest Thousand", "Seconds Into Minutes, " +
+                                        "Hours etc", "Width Category (if statement)", "Largest of Three Numbers (if statement)",
+                                        "Pattern Printing (for loop, break, continue)",
+                                        "Exit" };
+            MenuAction[] actions = { LanguageBasicsTasks.TaskAreaOfCircle, LanguageBasicsTasks.TaskFeetToCentimeters,
+                                     LanguageBasicsTasks.TaskNearestThousand, LanguageBasicsTasks.TaskConvertSecondsIntoMinutes,
+                                     LanguageBasicsTasks.TaskHeightCategory, LanguageBasicsTasks.TaskLargestofThreeNumbersOnlyIf,
+                                     LanguageBasicsTasks.TaskPatternPrinting};
+
             SubMenu(subMenuOptions, actions);
         }
+
         public static void HelloWorldAndConsoleCommands()
         {
             Console.Clear();
@@ -199,6 +207,71 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Here is result of using Ternary Operator, string title = (age < 13) ? \"Child\" : (age >= 13 && age <= 19) ? \"Teenager\" : \"Adult\":");
             string title = age < 13 ? "Child" : age >= 13 && age <= 19 ? "Teenager" : "Adult";
             Console.WriteLine(title + "\n");
+
+            string[] subMenuOptions = { "Exit" };
+            MenuAction[] actions = { };
+            SubMenu(subMenuOptions, actions);
+        }
+        public static void BreakAndContinue()
+        {
+            Console.Clear();
+            Console.WriteLine("Sup! Here is the difference between 'break;' and 'continue;' in practice");
+            Console.WriteLine("For example, we have:\n" +
+                              "for (int i = 0; i < 10; i++)\n" +
+                              "{\n\tif (i == 5)\n\t{\n\t\tbreak;\n\t}\n\tConsole.Write(i);\n}\n" +
+                              "The result will be:");
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    break;
+                }
+                Console.Write(i + " ");
+            }
+
+            Console.WriteLine("\nAs u can see, after i == 5, using Break; we leaved from for loop. And dot have any number after 4.\n" +
+                              "But if we will replace Break; to Continue; will see the result:");
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    continue;
+                }
+                Console.Write(i + " ");
+            }
+
+            Console.WriteLine("\nAs u can see, after when i == 5 we skipped this step, and do not number 5 in ours colletion");
+
+            Console.WriteLine();
+
+            string[] subMenuOptions = { "Exit" };
+            MenuAction[] actions = { };
+            SubMenu(subMenuOptions, actions);
+        }
+
+        public static void GoToStatement()
+        {
+            Console.Clear();
+
+            Console.WriteLine("Using goto we should write the name of the label, whick you want to jump\n" + "statement1;\n" + "statement2;\n" + "labelname\n" + "statement3;\n" + "statement4;\n" + "goto labelname\n");
+
+            Console.WriteLine("\nFor example goto with Console.WriteLine();\n\n" + "int i = 0;\nConsole.WriteLine(one);\n" + "Console.WriteLine(two);\n" + "mylabel:\n" + "Console.WriteLine(three);\n" + "Console.WriteLine(four)\n" + "i++\nif(i == 1) {goto mylabel;}\n" + "Console.WriteLine(five)\n" + "\nWell, then we will have the result:");
+            int i = 0;
+            Console.WriteLine("one");
+            Console.WriteLine("two");
+            mylabel:
+            Console.WriteLine("three");
+            Console.WriteLine("four");
+            i++;
+            if(i == 1)
+            {
+                goto mylabel;
+            }
+            Console.WriteLine("five\n");
+
+
 
             string[] subMenuOptions = { "Exit" };
             MenuAction[] actions = { };

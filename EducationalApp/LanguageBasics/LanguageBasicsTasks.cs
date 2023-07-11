@@ -7,8 +7,114 @@ using System.Transactions;
 
 namespace EducationalApp.LanguareBasics
 {
-    public class LanguaeBasicsTasks
+    public class LanguageBasicsTasks
     {
+        public static void TaskPatternPrinting()
+        {
+            Console.WriteLine("Write a C# program to print the following output by using 'for' loop, 'break' and 'continue' statements\n");
+            Console.WriteLine("Write a C# program to print the following output:" +
+                "\n1 2 3 4 7 8 9 10" +
+                "\n1 2 3 4 7 8 9 10" +
+                "\n1 2 3 4 7 8 9 10" +
+                "\n10 9 8 7 6 5 4 3 2 1" +
+                "\n10 9 8 7 6 5 4 3 2 1" +
+                "\n10 9 8 7 6 5 4 3" +
+                "\n10 9 8 7 6 5 4 3 2 1" +
+                "\n1 2 3 4 5 6 7 9 10" +
+                "\n\nEach number should be printed by using the loop variable." +
+                "\nDon't print full line at-a-time as string." +
+                "\nFor example, don't write statements as:" +
+                "\nSystem.Console.WriteLine(\"1 2 3 4 7 8 9 10\");" +
+                "\nUse for loop, break and continue statements to bring the output.\n");
+            PatternPrinting();
+        }
+
+        private static void PatternPrinting()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 11; j++)
+                {
+                    if (j == 5 || j == 6)
+                    {
+                        continue;
+                    }
+                    Console.Write(j + " ");
+                }
+                Console.WriteLine();
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 10; j >= 1; j--)
+                {
+                    if (i == 4)
+                    {
+                        if (j == 3) continue;
+                        Console.Write(11 - j + " ");
+
+                    }
+                    else
+                    {
+                        if (i == 2)
+                        {
+                            if (j == 2 || j == 1) continue;
+                        }
+                        Console.Write(j + " ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+        public static void TaskLargestofThreeNumbersOnlyIf()
+        {
+            Console.Write("Enter number a:");
+            int a = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter number b:");
+            int b = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter number c:");
+            int c = Convert.ToInt32(Console.ReadLine());
+            LargestOfThreeNumbers(a, b, c);
+
+        }
+        private static void LargestOfThreeNumbers(int a, int b, int c)
+        {
+            int bigger_number = 0;
+            if (a >= b)
+                if (a >= c) bigger_number = a;
+                else bigger_number = c;
+            else
+                if (b >= c) bigger_number = b;
+                else bigger_number = c;
+
+            Console.WriteLine($"Among of {a}, {b} and {c}, bigger number is {bigger_number}\n");
+
+        }
+        public static void TaskHeightCategory()
+        {
+            Console.WriteLine("Write a program to find out \"category of height\" based on the given height of a person (in inches), using \"if\".\n");
+            Console.WriteLine("Height categories:" +
+                              "\nHeight is less than 150 cm = \"Dwarf\"" +
+                              "\nHeight is between 150 cm and 165 cm = \"Average height\"" +
+                              "\nHeight is between 165 cm and 195 cm = \"Tall\"\r\n\r\nHeight is above 195 cm = \"Abnormal height\"" +
+                              "\nNote: 1 inch = 2.54 centimeter" +
+                              "\nYou need to convert the input value (inches) into centimeters." +
+                              "\nEg:" +
+                              "\nInput: 75" +
+                              "\nOutput: Tall\n");
+
+            Console.WriteLine("Enter your Height:");
+            int height = Convert.ToInt32(Console.ReadLine());
+            WidthCategory(height);
+        }
+        private static void WidthCategory(int height) 
+        {
+            if (height < 150) Console.WriteLine("Dwarf");
+            else if (height >= 150 && height < 165) Console.WriteLine("Average height\n");
+            else if (height > 165 && height <= 195) Console.WriteLine("Tall\n");
+            else Console.WriteLine("Abnormal height\n");
+        }
         public static void TaskConvertSecondsIntoMinutes()
         {
             Console.WriteLine("Eg:" +
@@ -64,7 +170,7 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Nearest Thousand is {NearestThousand(number)}\n");
         }
 
-        public static int NearestThousand(int number)
+        private static int NearestThousand(int number)
         {
             // for example 3894
             int prev_thousand = number / 1000 * 1000; // here is 3000
@@ -92,7 +198,7 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Area of Circle with radius {radius} is {AreaOfCircle(radius)} \n");
         }
 
-        static double AreaOfCircle(double radius)
+        private static double AreaOfCircle(double radius)
         {
             return double.Pi * radius * radius;
         }
@@ -120,7 +226,7 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Here is result of Feet To Centimetes, with values of feer - {feet} and inches - {inches}, and it will be {FeetToCentimeters(feet, inches)} cm. \n");
         }
 
-        public static double FeetToCentimeters(double feet, double inches)
+        private static double FeetToCentimeters(double feet, double inches)
         {
             return (feet * 12 + inches)*2.54;
         }

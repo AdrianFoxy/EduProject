@@ -70,8 +70,11 @@ namespace EducationalApp
                 // AnsiConsole.WriteLine($"Well, yo choosed. '{selectedOption}' is tasty! And id is {indexOfOption}");
 
                 // LanguageBasics SubMenu
-                string[] subMenuLanguageBasicsOptions = { "Hello World", "Primitive Types", "Basic Operators", "Tasks", "Exit" };
-                MenuAction[] actions = { LanguageBasics.HelloWorldAndConsoleCommands, LanguageBasics.PrimitiveTypes, LanguageBasics.OperatorsBasic, LanguageBasics.Tasks};            
+                string[] subMenuLanguageBasicsOptions = { "Hello World", "Primitive Types", "Basic Operators", 
+                                                          "Break And Continue", "goto Statement","Tasks", 
+                                                          "Exit" };
+                MenuAction[] actions = { LanguageBasics.HelloWorldAndConsoleCommands, LanguageBasics.PrimitiveTypes, LanguageBasics.OperatorsBasic,
+                                         LanguageBasics.BreakAndContinue, LanguageBasics.GoToStatement, LanguageBasics.Tasks};            
 
                 if (indexOfOption == 0) SubMenu(subMenuLanguageBasicsOptions, actions);
                 else if (indexOfOption == exitIndex-1) 
