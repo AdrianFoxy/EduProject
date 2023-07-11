@@ -9,6 +9,64 @@ namespace EducationalApp.LanguareBasics
 {
     public class LanguageBasicsTasks
     {
+        public static void TaskPatternPrinting()
+        {
+            Console.WriteLine("Write a C# program to print the following output by using 'for' loop, 'break' and 'continue' statements\n");
+            Console.WriteLine("Write a C# program to print the following output:" +
+                "\n1 2 3 4 7 8 9 10" +
+                "\n1 2 3 4 7 8 9 10" +
+                "\n1 2 3 4 7 8 9 10" +
+                "\n10 9 8 7 6 5 4 3 2 1" +
+                "\n10 9 8 7 6 5 4 3 2 1" +
+                "\n10 9 8 7 6 5 4 3" +
+                "\n10 9 8 7 6 5 4 3 2 1" +
+                "\n1 2 3 4 5 6 7 9 10" +
+                "\n\nEach number should be printed by using the loop variable." +
+                "\nDon't print full line at-a-time as string." +
+                "\nFor example, don't write statements as:" +
+                "\nSystem.Console.WriteLine(\"1 2 3 4 7 8 9 10\");" +
+                "\nUse for loop, break and continue statements to bring the output.\n");
+            PatternPrinting();
+        }
+
+        private static void PatternPrinting()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 11; j++)
+                {
+                    if (j == 5 || j == 6)
+                    {
+                        continue;
+                    }
+                    Console.Write(j + " ");
+                }
+                Console.WriteLine();
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 10; j >= 1; j--)
+                {
+                    if (i == 4)
+                    {
+                        if (j == 3) continue;
+                        Console.Write(11 - j + " ");
+
+                    }
+                    else
+                    {
+                        if (i == 2)
+                        {
+                            if (j == 2 || j == 1) continue;
+                        }
+                        Console.Write(j + " ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
         public static void TaskLargestofThreeNumbersOnlyIf()
         {
             Console.Write("Enter number a:");
