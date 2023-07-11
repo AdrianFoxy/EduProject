@@ -16,9 +16,9 @@ namespace EducationalApp.LanguareBasics
                                         "Nearest Thousand", "Seconds Into Minutes, " +
                                         "Hours etc", "Width Category", "Largest of Three Numbers Only If",
                                         "Exit" };
-            MenuAction[] actions = { LanguaeBasicsTasks.TaskAreaOfCircle, LanguaeBasicsTasks.TaskFeetToCentimeters,
-                                     LanguaeBasicsTasks.TaskNearestThousand, LanguaeBasicsTasks.TaskConvertSecondsIntoMinutes,
-                                     LanguaeBasicsTasks.TaskHeightCategory, LanguaeBasicsTasks.TaskLargestofThreeNumbersOnlyIf };
+            MenuAction[] actions = { LanguageBasicsTasks.TaskAreaOfCircle, LanguageBasicsTasks.TaskFeetToCentimeters,
+                                     LanguageBasicsTasks.TaskNearestThousand, LanguageBasicsTasks.TaskConvertSecondsIntoMinutes,
+                                     LanguageBasicsTasks.TaskHeightCategory, LanguageBasicsTasks.TaskLargestofThreeNumbersOnlyIf };
 
             SubMenu(subMenuOptions, actions);
         }

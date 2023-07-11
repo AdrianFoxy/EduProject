@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace EducationalApp.LanguareBasics
 {
-    public class LanguaeBasicsTasks
+    public class LanguageBasicsTasks
     {
         public static void TaskLargestofThreeNumbersOnlyIf()
         {
