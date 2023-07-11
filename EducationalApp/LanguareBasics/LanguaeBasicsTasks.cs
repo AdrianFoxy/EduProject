@@ -9,6 +9,54 @@ namespace EducationalApp.LanguareBasics
 {
     public class LanguaeBasicsTasks
     {
+        public static void TaskLargestofThreeNumbersOnlyIf()
+        {
+            Console.Write("Enter number a:");
+            int a = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter number b:");
+            int b = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter number c:");
+            int c = Convert.ToInt32(Console.ReadLine());
+            LargestOfThreeNumbers(a, b, c);
+
+        }
+        private static void LargestOfThreeNumbers(int a, int b, int c)
+        {
+            int bigger_number = 0;
+            if (a >= b)
+                if (a >= c) bigger_number = a;
+                else bigger_number = c;
+            else
+                if (b >= c) bigger_number = b;
+                else bigger_number = c;
+
+            Console.WriteLine($"Among of {a}, {b} and {c}, bigger number is {bigger_number}\n");
+
+        }
+        public static void TaskHeightCategory()
+        {
+            Console.WriteLine("Write a program to find out \"category of height\" based on the given height of a person (in inches), using \"if\".\n");
+            Console.WriteLine("Height categories:" +
+                              "\nHeight is less than 150 cm = \"Dwarf\"" +
+                              "\nHeight is between 150 cm and 165 cm = \"Average height\"" +
+                              "\nHeight is between 165 cm and 195 cm = \"Tall\"\r\n\r\nHeight is above 195 cm = \"Abnormal height\"" +
+                              "\nNote: 1 inch = 2.54 centimeter" +
+                              "\nYou need to convert the input value (inches) into centimeters." +
+                              "\nEg:" +
+                              "\nInput: 75" +
+                              "\nOutput: Tall\n");
+
+            Console.WriteLine("Enter your Height:");
+            int height = Convert.ToInt32(Console.ReadLine());
+            WidthCategory(height);
+        }
+        private static void WidthCategory(int height) 
+        {
+            if (height < 150) Console.WriteLine("Dwarf");
+            else if (height >= 150 && height < 165) Console.WriteLine("Average height\n");
+            else if (height > 165 && height <= 195) Console.WriteLine("Tall\n");
+            else Console.WriteLine("Abnormal height\n");
+        }
         public static void TaskConvertSecondsIntoMinutes()
         {
             Console.WriteLine("Eg:" +
@@ -64,7 +112,7 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Nearest Thousand is {NearestThousand(number)}\n");
         }
 
-        public static int NearestThousand(int number)
+        private static int NearestThousand(int number)
         {
             // for example 3894
             int prev_thousand = number / 1000 * 1000; // here is 3000
@@ -92,7 +140,7 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Area of Circle with radius {radius} is {AreaOfCircle(radius)} \n");
         }
 
-        static double AreaOfCircle(double radius)
+        private static double AreaOfCircle(double radius)
         {
             return double.Pi * radius * radius;
         }
@@ -120,7 +168,7 @@ namespace EducationalApp.LanguareBasics
             Console.WriteLine($"Here is result of Feet To Centimetes, with values of feer - {feet} and inches - {inches}, and it will be {FeetToCentimeters(feet, inches)} cm. \n");
         }
 
-        public static double FeetToCentimeters(double feet, double inches)
+        private static double FeetToCentimeters(double feet, double inches)
         {
             return (feet * 12 + inches)*2.54;
         }
