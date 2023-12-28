@@ -1,112 +1,173 @@
-﻿using EducationalApp.LanguareBasics;
+﻿using EducationalApp.LogicalOperators;
+using EducationalApp.DataTypes;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace EducationalApp
 {
     public class MainMenu
     {
-        public delegate void MenuAction();
-
-        public static void SubMenu(string[] subMenuValue, MenuAction[] actions)
+        public MainMenu()
         {
-            while (true)
-            {
-                int exitIndex = subMenuValue.Length;
-
-                var selectedOption = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
-                        .Title("Select your [blue]menu option[/]?")
-                        .PageSize(10)
-                        .MoreChoicesText("[grey](Move up and down to reveal more options)[/]")
-                        .AddChoices(subMenuValue)
-                );
-                int indexOfOption = Array.IndexOf(subMenuValue, selectedOption);
-
-                if (indexOfOption >= 0 && indexOfOption < actions.Length)
-                {              
-                    MenuAction selectedAction = actions[indexOfOption];
-                    selectedAction();
-                }
-                else if (indexOfOption == exitIndex-1) Menu();            
-                else { Console.WriteLine("Wrong menu option!"); Thread.Sleep(1000); }
-            }
+            Console.Title = "EduApp";
+            ShowMenu();
         }
 
-        public static void Menu()
+        public void ShowMenu()
         {
             while (true)
             {
-                Console.Clear();
+                ClearConsole();
 
-                AnsiConsole.Write(
-                    new FigletText("EduApp \\o/")
-                        .LeftJustified()
-                        .Color(Color.Aqua));
-
-                var menu_options = new[] {
-                    "Language Basics",
-                    "Exit the program"
-                };
-
-                int exitIndex = menu_options.Length;
-                Console.WriteLine();
-
-                var selectedOption = AnsiConsole.Prompt(
+                var selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title("Select your [blue]menu option[/]?")
+                        .Title("Select[blue] an option[/]")
                         .PageSize(10)
-                        .MoreChoicesText("[grey](Move up and down to reveal more options)[/]")
-                        .AddChoices(menu_options)
-                );
+                        .MoreChoicesText("More")
+                        .AddChoices("Data types","String", "Boolean logical operators - AND, OR, NOT, XOR", "Exit"));
 
-                int indexOfOption = Array.IndexOf(menu_options, selectedOption);
-
-                // Echo the selected option back to the terminal
-                // AnsiConsole.WriteLine($"Well, yo choosed. '{selectedOption}' is tasty! And id is {indexOfOption}");
-
-                // LanguageBasics SubMenu
-                string[] subMenuLanguageBasicsOptions = { "Hello World", "Primitive Types", "Basic Operators", 
-                                                          "Break And Continue", "goto Statement","Tasks", 
-                                                          "Exit" };
-                MenuAction[] actions = { LanguageBasics.HelloWorldAndConsoleCommands, LanguageBasics.PrimitiveTypes, LanguageBasics.OperatorsBasic,
-                                         LanguageBasics.BreakAndContinue, LanguageBasics.GoToStatement, LanguageBasics.Tasks};            
-
-                if (indexOfOption == 0) SubMenu(subMenuLanguageBasicsOptions, actions);
-                else if (indexOfOption == exitIndex-1) 
+                switch (selection)
                 {
-                    if (AnsiConsole.Confirm("Run prompt example?"))
-                    {
-                        AnsiConsole.MarkupLine("Ok... :(");
-                        AnsiConsole.Progress()
-                        .StartAsync(async ctx =>
-                        {
-                            // Define tasks
-                            var task1 = ctx.AddTask("[blue] Deleting Sys32[/]");
-
-                            while (!ctx.IsFinished)
-                            {
-                                // Simulate some work
-                                await Task.Delay(10);
-
-                                // Increment
-                                task1.Increment(1.5);
-                            }
-                            Console.WriteLine(" Done <3");
-
-                        });
-                        Thread.Sleep(3000); Environment.Exit(0);
-                    }
- 
+                    case "Data types":
+                        ShowSubmenu(new string[] { "All data types" });
+                        break;
+                    case "String":
+                        ShowSubmenu(new string[] { "What is String type?", "String Methods" });
+                        break;
+                    case "Boolean logical operators - AND, OR, NOT, XOR":
+                        ShowSubmenu(new string[] { "AND &", "OR |", "NOT !", "XOR ^"});
+                        break;
+                    case "Exit":
+                        DeleteSys32();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection");
+                        break;
                 }
-                else { Console.WriteLine("Wrong menu option!"); Thread.Sleep(1000); }
             }
         }
 
-    }
+        private void ShowSubmenu(string[] submenuOptions)
+        {
+            var optionsWithBack = submenuOptions.Concat(new[] { "Back" }).ToArray();
 
+            var submenuActions = new Dictionary<string, Action>
+            {
+                { "All data types", () => new DataTypesInfo().ShowAllDataTypes("Show all data types") },
+                { "String Methods", () => ShowSubmenu(new string[] { "Info", "Examples" }) },
+                { "What is String type?", () => ShowSubmenu(new string[] { "Info", "Examples" }) },
+                { "AND &", () => ShowLogicalOperatorsSubMenu("AND &", new LogicalOperatorsInfo()) },
+                { "OR |", () => ShowLogicalOperatorsSubMenu("OR |", new LogicalOperatorsInfo()) },
+                { "NOT !", () => ShowSubmenu(new string[] { "Info", "Examples", "Tests", "" }) },
+                { "XOR ^", () => ShowSubmenu(new string[] { "Info", "Examples", "Tests" }) },
+            };
+
+            while (true)
+            {
+                var subMenuSelection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("Select a submenu option")
+                        .PageSize(10)
+                        .MoreChoicesText("More")
+                        .AddChoices(optionsWithBack));
+
+                if (subMenuSelection == "Back")
+                {
+                    return;
+                }
+
+                if (submenuActions.TryGetValue(subMenuSelection, out var action))
+                {
+                    action();
+                    Console.WriteLine($"You selected {subMenuSelection}");
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid selection: {subMenuSelection} first menu");
+                }
+            }
+        }
+
+      /*private void ShowDataTypesSubMenu(string menuObjeName, DataTypesInfo handler)
+        {
+            var actions = new Dictionary<string, Action<DataTypesInfo>>
+            {
+                { "Show data types info", h => h.ShowAllDataTypes(menuObjeName) }
+            };
+            ShowSubmenu(handler, actions);
+        }*/
+
+        private void ShowLogicalOperatorsSubMenu(string menuObjeName, LogicalOperatorsInfo handler)
+        {
+            var actions = new Dictionary<string, Action<LogicalOperatorsInfo>>
+            {
+                { "Info", h => h.ShowInfo(menuObjeName) },
+                { "Examples", h => h.ShowExamples(menuObjeName) },
+            };
+            ShowSubmenu(handler, actions);
+        }
+
+        private void ShowSubmenu<T>(T submenuHandler, Dictionary<string, Action<T>> menuActions) where T : class
+        {
+            var submenuOptions = menuActions.Keys.Concat(new[] { "Back" }).ToArray();
+
+            while (true)
+            {
+                var subMenuSelection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("Select a submenu option")
+                        .PageSize(10)
+                        .MoreChoicesText("More")
+                        .AddChoices(submenuOptions));
+
+                if (subMenuSelection == "Back")
+                {
+                    return;
+                }
+
+                if (menuActions.TryGetValue(subMenuSelection, out var action))
+                {
+                    action(submenuHandler);
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid selection: {subMenuSelection}");
+                }
+            }
+        }
+
+        public void ClearConsole()
+        {
+            Console.Clear();
+
+            AnsiConsole.Write(
+            new FigletText("EduApp \\o/")
+                .LeftJustified()
+                .Color(Color.Aqua));
+        }
+
+        public void DeleteSys32()
+        {
+            AnsiConsole.MarkupLine("Ok... :(");
+            AnsiConsole.Progress()
+            .StartAsync(async ctx =>
+            {
+                // Define tasks
+                var task1 = ctx.AddTask("[blue] Deleting Sys32[/]");
+
+                while (!ctx.IsFinished)
+                {
+                    // Simulate some work
+                    await Task.Delay(10);
+
+                    // Increment
+                    task1.Increment(1.5);
+                }
+                Console.WriteLine(" Done <3");
+
+            });
+
+            Thread.Sleep(1500); Environment.Exit(0);
+        }
+    }
 }
