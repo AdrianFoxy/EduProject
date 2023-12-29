@@ -1,7 +1,7 @@
 ﻿using EducationalApp.LogicalOperators;
 using EducationalApp.DataTypes;
 using Spectre.Console;
-
+using EducationalApp.StringsInfo;
 
 namespace EducationalApp
 {
@@ -32,7 +32,7 @@ namespace EducationalApp
                         ShowSubmenu(new string[] { "All data types" });
                         break;
                     case "String":
-                        ShowSubmenu(new string[] { "What is String type?", "String Methods" });
+                        ShowSubmenu(new string[] { "What is String type?", "String operators", "Immutability of String Objects", "String Escape Sequences", "Methods of C# string" });
                         break;
                     case "Boolean logical operators - AND, OR, NOT, XOR":
                         ShowSubmenu(new string[] { "AND &", "OR |", "NOT !", "XOR ^"});
@@ -54,8 +54,13 @@ namespace EducationalApp
             var submenuActions = new Dictionary<string, Action>
             {
                 { "All data types", () => new DataTypesInfo().ShowAllDataTypes("Show all data types") },
-                { "String Methods", () => ShowSubmenu(new string[] { "Info", "Examples" }) },
-                { "What is String type?", () => ShowSubmenu(new string[] { "Info", "Examples" }) },
+
+                { "What is String type?", () => new StringsInfoMain().ShowGeneralInfo() },
+                { "String operators", () => new StringsInfoMain().ShowStringOperator()},
+                { "Immutability of String Objects", () => new StringsInfoMain().ShowStringImmutability()},
+                { "String Escape Sequences", () => new StringsInfoMain().ShowEscapeSequences()},
+                { "Methods of C# string", () => new StringsInfoMain().ShowStringMethods()},
+
                 { "AND &", () => ShowLogicalOperatorsSubMenu("AND &", new LogicalOperatorsInfo()) },
                 { "OR |", () => ShowLogicalOperatorsSubMenu("OR |", new LogicalOperatorsInfo()) },
                 { "NOT !", () => ShowLogicalOperatorsSubMenu("NOT !", new LogicalOperatorsInfo()) },
@@ -78,8 +83,9 @@ namespace EducationalApp
 
                 if (submenuActions.TryGetValue(subMenuSelection, out var action))
                 {
+                    ClearConsole();
                     action();
-                    Console.WriteLine($"You selected {subMenuSelection}");
+                    Console.WriteLine($"\nYou selected {subMenuSelection}");
                 }
                 else
                 {
@@ -87,16 +93,6 @@ namespace EducationalApp
                 }
             }
         }
-
-      /*private void ShowDataTypesSubMenu(string menuObjeName, DataTypesInfo handler)
-        {
-            var actions = new Dictionary<string, Action<DataTypesInfo>>
-            {
-                { "Show data types info", h => h.ShowAllDataTypes(menuObjeName) }
-            };
-            ShowSubmenu(handler, actions);
-        }*/
-
         private void ShowLogicalOperatorsSubMenu(string menuObjeName, LogicalOperatorsInfo handler)
         {
             var actions = new Dictionary<string, Action<LogicalOperatorsInfo>>
@@ -127,6 +123,7 @@ namespace EducationalApp
 
                 if (menuActions.TryGetValue(subMenuSelection, out var action))
                 {
+                    ClearConsole();
                     action(submenuHandler);
                 }
                 else
@@ -144,6 +141,7 @@ namespace EducationalApp
             new FigletText("EduApp \\o/")
                 .LeftJustified()
                 .Color(Color.Aqua));
+            Console.WriteLine();
         }
 
         public void DeleteSys32()
