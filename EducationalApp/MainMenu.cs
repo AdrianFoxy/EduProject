@@ -58,8 +58,8 @@ namespace EducationalApp
                 { "What is String type?", () => ShowSubmenu(new string[] { "Info", "Examples" }) },
                 { "AND &", () => ShowLogicalOperatorsSubMenu("AND &", new LogicalOperatorsInfo()) },
                 { "OR |", () => ShowLogicalOperatorsSubMenu("OR |", new LogicalOperatorsInfo()) },
-                { "NOT !", () => ShowSubmenu(new string[] { "Info", "Examples", "Tests", "" }) },
-                { "XOR ^", () => ShowSubmenu(new string[] { "Info", "Examples", "Tests" }) },
+                { "NOT !", () => ShowLogicalOperatorsSubMenu("NOT !", new LogicalOperatorsInfo()) },
+                { "XOR ^", () => ShowLogicalOperatorsSubMenu("XOR ^", new LogicalOperatorsInfo()) },
             };
 
             while (true)
@@ -115,7 +115,7 @@ namespace EducationalApp
             {
                 var subMenuSelection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title("Select a submenu option")
+                        .Title("\nSelect a submenu option")
                         .PageSize(10)
                         .MoreChoicesText("More")
                         .AddChoices(submenuOptions));
