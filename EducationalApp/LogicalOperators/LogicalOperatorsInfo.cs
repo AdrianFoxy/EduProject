@@ -94,5 +94,31 @@ namespace EducationalApp.LogicalOperators
                 Console.WriteLine("Info about examples of this logical operator doesn't exist");
             }
         }
+
+        public void Examples()
+        {
+            Console.WriteLine("bool Foo(bool x, bool y, bool z) => x | (y ^ !z);");
+            Console.WriteLine("Console.WriteLike(Foo(true, false, false))");
+            Console.WriteLine("Output: true\n\n");
+
+            Console.WriteLine("bool Foo(bool x, bool y, bool z) => x | (!y & !z);");
+            Console.WriteLine("Console.WriteLike(Foo(true, false, false))");
+            Console.WriteLine("Output: true\n\n");
+
+
+            Console.WriteLine("bool Foo(bool x, bool y, bool z) => !x & (y | !z);");
+            Console.WriteLine("Console.WriteLike(Foo(true, false, false))");
+            Console.WriteLine("Output: false\n\n");
+
+
+            Console.WriteLine("bool Foo(bool x, bool y, bool z) => x & (!y ^ !z);");
+            Console.WriteLine("Console.WriteLike(Foo(true, false, false))");
+            Console.WriteLine("Output: false\n\n");
+
+
+            Console.WriteLine("bool Foo(bool x, bool y, bool z) => !x | (!y & z);");
+            Console.WriteLine("Console.WriteLike(Foo(true, false, false))");
+            Console.WriteLine("Output: false\n\n");
+        }
     }
 }

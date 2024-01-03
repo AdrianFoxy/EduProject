@@ -2,6 +2,7 @@
 using EducationalApp.DataTypes;
 using Spectre.Console;
 using EducationalApp.StringsInfo;
+using EducationalApp.ExceptionClasses;
 
 namespace EducationalApp
 {
@@ -24,7 +25,7 @@ namespace EducationalApp
                         .Title("Select[blue] an option[/]")
                         .PageSize(10)
                         .MoreChoicesText("More")
-                        .AddChoices("Data types","String", "Boolean logical operators - AND, OR, NOT, XOR", "Exit"));
+                        .AddChoices("Data types","String", "Boolean logical operators - AND, OR, NOT, XOR", "Exceptions", "Exit"));
 
                 switch (selection)
                 {
@@ -35,7 +36,10 @@ namespace EducationalApp
                         ShowSubmenu(new string[] { "What is String type?", "String operators", "Immutability of String Objects", "String Escape Sequences", "Methods of C# string" });
                         break;
                     case "Boolean logical operators - AND, OR, NOT, XOR":
-                        ShowSubmenu(new string[] { "AND &", "OR |", "NOT !", "XOR ^"});
+                        ShowSubmenu(new string[] { "AND &", "OR |", "NOT !", "XOR ^", "Examples"});
+                        break;
+                    case "Exceptions":
+                        ShowSubmenu(new string[] { "Exceptions info", "Exception Examples" });
                         break;
                     case "Exit":
                         DeleteSys32();
@@ -65,6 +69,12 @@ namespace EducationalApp
                 { "OR |", () => ShowLogicalOperatorsSubMenu("OR |", new LogicalOperatorsInfo()) },
                 { "NOT !", () => ShowLogicalOperatorsSubMenu("NOT !", new LogicalOperatorsInfo()) },
                 { "XOR ^", () => ShowLogicalOperatorsSubMenu("XOR ^", new LogicalOperatorsInfo()) },
+                { "Examples", () => new LogicalOperatorsInfo().Examples() },
+
+                { "Exceptions info", () => new LogicalOperatorsInfo().Examples() },
+                { "Exception Examples", () => new ExceptionsExamples().Example1() },
+
+
             };
 
             while (true)
